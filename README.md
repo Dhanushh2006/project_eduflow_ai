@@ -87,7 +87,23 @@ Create `.env` from `.env.example` (never commit real secrets).
 ## Testing
 Scheduler test: Teacher A double-booked MON P3 for 8A & 10A → CONFLICT TRUE → after move → CONFLICT FALSE. Document schema + confidence + anomaly + health covered in `src/lib/__tests__.ts` and `backend/app/scheduler/solver.py`.
 
-## Deployment
+## Deployment — Vercel (one-click)
+
+**Vercel (frontend):**
+
+1. **Import** `https://github.com/Dhanushh2006/project_eduflow_ai` in Vercel → Framework: **Vite** (auto-detected)
+2. **Root Directory:** `eduflow` (if you pushed the inner folder) or `.` (if repo root is `eduflow`) — Build: `npm run build` → Output: `dist` → `vercel.json` already handles SPA rewrites
+3. **Env (optional):** `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` — demo runs without them (seeded store). For prod, add from Supabase project.
+4. Deploy → **Live URL** auto-generated. No extra config needed — `vercel.json` rewrites `/`* → `/index.html` for React Router, `allowedHosts: true` for preview.
+
+**Local verify before deploy:**
+```bash
+npm run build # must pass
+npm run preview # http://localhost:4173 — test all 15 routes
+```
+
+**Backend (optional, Render/Railway):** `backend/` is FastAPI — deploy with `uvicorn app.main:app --host 0.0.0.0 --port 8000`, set `DATABASE_URL` + `GEMINI_API_KEY` from `backend/requirements.txt`.
+
 Build: `npm run build` → `dist/` passes • Preview: `npm run preview` • Hosting: Vercel (frontend) / Render (backend) / Supabase PG • CORS & allowedHosts configured for `*.e2b.app` preview.
 
 ## Future Roadmap
