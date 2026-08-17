@@ -6,20 +6,9 @@
       "buildCommand": "npm run build",
       "outputDirectory": "dist",
       "installCommand": "npm install"
-    },
-    "backend": {
-      "root": "backend",
-      "framework": "fastapi"
     }
   },
   "rewrites": [
-    {
-      "source": "/api(/.*)?",
-      "destination": {
-        "type": "service",
-        "service": "backend"
-      }
-    },
     {
       "source": "/(.*)",
       "destination": {
